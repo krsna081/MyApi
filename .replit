@@ -1,0 +1,6 @@
+language="nodejs"
+run="npm i && pm2 start index.js && pm2 save && pm2 logs"
+
+[[ports]]
+localPort = 8080
+externalPort = 80
