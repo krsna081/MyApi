@@ -21,7 +21,7 @@ var { color } = require('./lib/color.js');
 
 const { isAuthenticated } = require('./lib/auth');
 //const { connectMongoDb } = require('./MongoDB/mongodb');
-const { getVisitors, addVisitors, resetAllLimit, getApikey } = require('./MongoDB/function');
+const { getVisitors, addVisitors, resetAllLimit, getApikey } = require('./database/function');
 var apirouter = require('./routes/api'),
     mainrouter = require('./routes/main'),
     userrouter = require('./routes/users');
