@@ -285,7 +285,7 @@ router.get('/download/instagram', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
 
-    let iglu = await scr.instagramdl(url)
+    await scr.instagramdl(url)
     .then(data => {
             var result = data;
             res.json({
@@ -351,7 +351,7 @@ router.get('/download/tiktok', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    let ttlu = await scr.tiktokdl(url)
+    await scr.tiktokdl(url)
     .then(data => {
             var result = data;
             res.json({
