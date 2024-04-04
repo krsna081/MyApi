@@ -13,7 +13,7 @@ const {
    checkEmail,
    checkUsername,
    addUser
-} = require('../MongoDB/function');
+} = require('../database/function');
 const {
    notAuthenticated
 } = require('../lib/auth');
