@@ -14,7 +14,7 @@ const {
     isLimit,
     cekKey,
     checkLimit
-} = require('../MongoDB/function');
+} = require('../database/function');
 const scr = require('@bochilteam/scraper');
 const {
     color,
