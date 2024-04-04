@@ -20,13 +20,12 @@ var app = express()
 var { color } = require('./lib/color.js');
 
 const { isAuthenticated } = require('./lib/auth');
-const { connectMongoDb } = require('./MongoDB/mongodb');
-const { resetAllLimit, getApikey } = require('./MongoDB/function');
-const { getVisitors, addVisitors } = require('./database/visitors.js');
+//const { connectMongoDb } = require('./MongoDB/mongodb');
+const { getVisitors, addVisitors, resetAllLimit, getApikey } = require('./MongoDB/function');
 var apirouter = require('./routes/api'),
     mainrouter = require('./routes/main'),
     userrouter = require('./routes/users');
-connectMongoDb()
+//connectMongoDb()
 app.set('trust proxy', 1);
 app.use(compression());
 
