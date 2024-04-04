@@ -262,10 +262,6 @@ router.get('/download/facebook', async (req, res, next) => {
     res.json({
             result
     })
-    .catch(e => {
-        console.log(e);
-        res.json(loghandler.error)
-    })
     limitAdd(apikey);
 })
 router.get('/download/instagram', async (req, res, next) => {
@@ -290,14 +286,16 @@ router.get('/download/instagram', async (req, res, next) => {
     });
 
     let iglu = await scr.instagramdl(url)
-    var result = iglu;
-    res.json({
-            result
-    })
-    .catch(e => {
-        console.log(e);
-        res.json(loghandler.error)
-    })
+    .then(data => {
+            var result = data;
+            res.json({
+                result
+            })
+        })
+        .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
     limitAdd(apikey);
 })
 router.get('/download/pinterest', async (req, res, next) => {
@@ -354,9 +352,11 @@ router.get('/download/tiktok', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
     let ttlu = await scr.tiktokdl(url)
-    var result = ttlu;
-    res.json({
-            result
+    .then(data => {
+            var result = data;
+            res.json({
+                result
+            })
         })
         .catch(e => {
             console.log(e);
