@@ -5,7 +5,7 @@ global.MONGO_DB_URI = ''
 global.ACTIVATION_TOKEN_SECRET = "-@Pqnap+@(/1jAPPnew/@10" //isi apa aja bebas
 global.your_email = "sandikurniawan12042004@gmail.com"
 global.email_password = "plgeklttdfciejjw"
-global.limitCount = 20
+global.limitCount = 1000
 global.YUOR_PORT = 8000
 global.loghandler = {
 	noapikey:{
