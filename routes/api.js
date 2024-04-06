@@ -402,7 +402,7 @@ router.get('/download/ytmp3', async (req, res, next) => {
                 download: kin
             })
         }
-    } catch {
+    } catch (e){
         console.log(e);
         res.json(loghandler.error)
     }
@@ -446,7 +446,7 @@ router.get('/download/ytmp4', async (req, res, next) => {
                 download: kin
             })
         }
-    } catch {
+    } catch (e){
         console.log(e);
         res.json(loghandler.error)
     }
