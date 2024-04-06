@@ -4,6 +4,7 @@ require('../settings.js');
 var express = require('express');
 var axios = require('axios');
 var fetch = require('node-fetch');
+var cheerio = require("cheerio");
 var request = require('request');
 var fs = require('fs');
 var router = express.Router();
