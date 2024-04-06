@@ -1349,6 +1349,41 @@ router.get('/other/github-stalk', async (req, res, next) => {
     })
     limitAdd(apikey);
 });
-
+router.get('/other/jarak', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var from = req.query.dari
+    var to = req.query.ke
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!(from && to)) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter dari & ke"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+    try {
+        var html = (await axios(`https://www.google.com/search?q=${encodeURIComponent('jarak ' + from + ' ke ' + to)}&hl=id`)).data
+        var $ = cheerio.load(html), result = {}
+        var img = html.split("var s=\'")?.[1]?.split("\'")?.[0]
+        result.img = /^data:.*?\/.*?;base64,/i.test(img) ? Buffer.from(img.split`,` [1], 'base64') : ''
+        result.desc = $('div.BNeawe.deIvCb.AP7Wnd').text()?.trim()
+        res.json({
+            result
+        })
+    } catch (e) {
+        console.log(e);
+        res.json(loghandler.error)
+    }
+    limitAdd(apikey);
+});
 
 module.exports = router
