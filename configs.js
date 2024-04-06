@@ -226,6 +226,11 @@ OTHER_API = [
         name: 'Github-Stalk',
         params: 'Username & Apikey',
         url: '/api/other/github-stalk?username=NdyZz&apikey='
+    },
+    {
+        name: 'Jarak',
+        params: 'Dari & Ke & Apikey',
+        url: '/api/other/jarak?dari=makassar&ke=jakarta&apikey='
     }
 ];
 
