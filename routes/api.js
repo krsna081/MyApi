@@ -1421,10 +1421,10 @@ router.get('/other/geospy', async (req, res, next) => {
     };
     await fetch(`https://dev.geospy.ai/predict`, options)
     .then(response => response.json())
-    .then(data => {
-        var result = data;
+    .then(result => {
+        var hasil = result;
         res.json({
-            result
+            hasil
         })
     })
     .catch(e => {
