@@ -1411,7 +1411,6 @@ router.get('/other/geospy', async (req, res, next) => {
         const dat = await getBase64(url)
         const options = {
             method: 'POST',
-            url: 'https://dev.geospy.ai/predict',
             headers: {
                 Authorization: 'Bearer zpka_87fcc29824e446618f9f0d45f27653f1_3a6ce29d',
                 'Content-Type': 'application/json'
@@ -1421,16 +1420,9 @@ router.get('/other/geospy', async (req, res, next) => {
                 image: dat.split(',')[1]
             }
         };
-        await fetchJson(options)
-        .then(function (response) {
-            const result = response.json()
-            console.log(result)
-            res.json(result.result)
-        })
-        .catch(function (e) {
-            console.error(e);
-            res.json(loghandler.error)
-        });
+        const result = await fetchJson('https://dev.geospy.ai/predict', options)
+        console.log(result)
+        res.json(result)
     } catch (e) {
         console.log(e);
         res.json(loghandler.error)
