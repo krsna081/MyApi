@@ -1423,7 +1423,7 @@ router.get('/other/geospy', async (req, res, next) => {
         };
         await axios.request(options)
         .then(function (response) {
-            const result = JSON.parse(response.data.result)
+            const { result } = JSON.parse(response.data)
             res.json({
                 result
             })
