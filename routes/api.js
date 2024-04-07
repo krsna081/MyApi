@@ -1408,29 +1408,22 @@ router.get('/other/geospy', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
     const dat = await getBase64(url)
+    const urls = 'https://dev.geospy.ai/predict';
     const options = {
         method: 'POST',
         headers: {
             Authorization: 'Bearer zpka_136dab30f03945dd983bb8f5ee18215c_54fe3569',
             'Content-Type': 'application/json'
         },
-        data: {
+        body: JSON.stringify({
             top_k: 1,
             image: dat.split(',')[1]
-        }
-    };
-    await fetch(`https://dev.geospy.ai/predict`, options)
-    .then(response => response.json())
-    .then(result => {
-        var hasil = result;
-        res.json({
-            hasil
         })
-    })
-    .catch(e => {
-        console.log(e);
-        res.json(loghandler.error)
-    })
+    };
+    fetch(urls, options)
+        .then(resp => resp.json())
+        .then(json => res.json(json))
+        .catch(err => console.error('error:' + err));
     limitAdd(apikey);
 });
 
