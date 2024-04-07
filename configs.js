@@ -236,7 +236,13 @@ OTHER_API = [
         name: 'Geospy',
         params: 'Url & Apikey',
         url: '/api/other/geospy?url=https://telegra.ph/file/7a82f0c88814ffe438f7a.jpg&apikey='
+    },
+    {
+        name: 'Stalk Sosmed',
+        params: 'Username & Apikey',
+        url: '/api/other/stalksosmed?username=NdyZz&apikey='
     }
+    
 ];
 
 module.exports = { CECAN_API, DOWNLOADS_API, PHOOTOXY_API, SEARCH_API, ISLAMIC_API, GAME_API, OTHER_API };
