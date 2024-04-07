@@ -1423,7 +1423,49 @@ router.get('/other/geospy', async (req, res, next) => {
     fetch(urls, options)
         .then(resp => resp.json())
         .then(json => res.json(json))
-        .catch(err => console.error('error:' + err));
+        .catch(err => {
+            console.error('error:' + err)
+            res.json(loghandler.error)
+        });
+    limitAdd(apikey);
+});
+router.get('/other/stalksosmed', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var user = req.query.username
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!user) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter username"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+    const urls = "https://usernamescraper-7cs5mab6na-uc.a.run.app"
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: user
+        })
+    };
+    fetch(urls, options)
+        .then(resp => resp.json())
+        .then(json => res.json(json))
+        .catch(err => {
+            console.error('error:' + err)
+            res.json(loghandler.error)
+        });
     limitAdd(apikey);
 });
 
