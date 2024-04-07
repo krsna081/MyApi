@@ -1412,7 +1412,7 @@ router.get('/other/geospy', async (req, res, next) => {
     const options = {
         method: 'POST',
         headers: {
-            Authorization: 'Bearer zpka_136dab30f03945dd983bb8f5ee18215c_54fe3569',
+            Authorization: `Bearer ${listApi[Math.floor(Math.random() * listApi.length)]}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
