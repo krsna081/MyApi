@@ -1421,10 +1421,10 @@ router.get('/other/geospy', async (req, res, next) => {
                 image: dat.split(',')[1]
             }
         };
-        await axios.request(options)
+        await fetchJson(options)
         .then(function (response) {
-            const result = response.data.result
-            res.json(result)
+            const result = response.json()
+            res.json(result.result)
         })
         .catch(function (e) {
             console.error(e);
