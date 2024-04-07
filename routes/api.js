@@ -1420,7 +1420,8 @@ router.get('/other/geospy', async (req, res, next) => {
                 image: dat.split(',')[1]
             }
         };
-        const result = await fetchJson('https://dev.geospy.ai/predict', options)
+        const dats = await fetch('https://dev.geospy.ai/predict', options)
+        const result = dats.json()
         console.log(result)
         res.json(result)
     } catch (e) {
