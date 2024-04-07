@@ -1419,7 +1419,7 @@ router.get('/other/geospy', async (req, res, next) => {
             image: dat.split(',')[1]
         }
     };
-    await fetch(encodeURI(`https://dev.geospy.ai/predict`))
+    await fetch(encodeURI(`https://dev.geospy.ai/predict`), options)
     .then(response => response.json())
     .then(data => {
         var result = data;
