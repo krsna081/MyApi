@@ -1424,6 +1424,7 @@ router.get('/other/geospy', async (req, res, next) => {
         await fetchJson(options)
         .then(function (response) {
             const result = response.json()
+            console.log(result)
             res.json(result.result)
         })
         .catch(function (e) {
