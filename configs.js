@@ -231,6 +231,11 @@ OTHER_API = [
         name: 'Jarak',
         params: 'Dari & Ke & Apikey',
         url: '/api/other/jarak?dari=makassar&ke=jakarta&apikey='
+    },
+    {
+        name: 'Geospy',
+        params: 'Url & Apikey',
+        url: '/api/other/geospy?url=https://telegra.ph/file/7a82f0c88814ffe438f7a.jpg&apikey='
     }
 ];
 
