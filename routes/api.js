@@ -1421,7 +1421,7 @@ router.get('/other/geospy', async (req, res, next) => {
             }
         };
         const dats = await fetch('https://dev.geospy.ai/predict', options)
-        const result = dats.json()
+        const result = await dats.json()
         console.log(result)
         res.json(result)
     } catch (e) {
