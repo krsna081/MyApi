@@ -22,7 +22,8 @@ const {
     bgcolor
 } = require(__path + '/lib/color.js');
 const {
-    fetchJson
+    fetchJson,
+    getBase64
 } = require(__path + '/lib/fetcher.js');
 const options = require(__path + '/lib/options.js');
 const {
@@ -1380,6 +1381,57 @@ router.get('/other/jarak', async (req, res, next) => {
         res.json({
             result
         })
+    } catch (e) {
+        console.log(e);
+        res.json(loghandler.error)
+    }
+    limitAdd(apikey);
+});
+router.get('/other/geospy', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var url = req.query.url
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter url"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+    try {
+        const dat = await getBase64(url)
+        const options = {
+            method: 'POST',
+            url: 'https://dev.geospy.ai/predict',
+            headers: {
+                Authorization: 'Bearer zpka_87fcc29824e446618f9f0d45f27653f1_3a6ce29d',
+                'Content-Type': 'application/json'
+            },
+            data: {
+                top_k: 1,
+                image: dat.split(',')[1]
+            }
+        };
+        await axios.request(options)
+        .then(function (response) {
+            const result = response.data
+            res.json({
+                result
+            })
+        })
+        .catch(function (e) {
+            console.error(e);
+            res.json(loghandler.error)
+        });
     } catch (e) {
         console.log(e);
         res.json(loghandler.error)
